@@ -27,8 +27,8 @@ const Home: React.FC<HomeProps> = ({ products, bannerData }) => {
 }
 
 export const getServerSideProps = async() => {
-  const productQuery = '*[_type == "product"]';
-  const products = await client.fetch(productQuery);
+  const productsQuery = '*[_type == "product"]';
+  const products = await client.fetch(productsQuery);
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
   return {
