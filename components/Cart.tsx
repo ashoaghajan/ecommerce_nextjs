@@ -2,9 +2,9 @@ import React, { useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineMinus, AiOutlinePlus, AiOutlineLeft } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
-import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../lib/client';
+import { makePayment } from '../lib/getStripe';
 
 interface CartProps {
     
@@ -14,6 +14,8 @@ const Cart: React.FC<CartProps> = () => {
 
     const cartRef = useRef(null);
     const { total, cartItems, setShowCart, changeCartItemQty, handleRemoveProduct }: StateContext = useStateContext();
+
+    const handleChechout = () => makePayment(cartItems);
 
     return ( 
         <div className="cart-wrapper" ref={cartRef}>
@@ -73,7 +75,7 @@ const Cart: React.FC<CartProps> = () => {
                             <h3>${total.price}</h3>
                         </div>
                         <div className="btn-container">
-                            <button type='button' className='btn' onClick={() => {}}>
+                            <button type='button' className='btn' onClick={handleChechout}>
                                 Pay with Stripe
                             </button>
                         </div>
