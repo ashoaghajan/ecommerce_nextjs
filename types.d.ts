@@ -21,6 +21,10 @@ type Product = {
     _updatedAt: string,
 }
 
+interface ProductItem extends Product{
+    qty: number,
+}
+
 type BannerData = {
     buttonText: string,
     desc: string,
@@ -43,4 +47,20 @@ type BannerData = {
     _rev: string,
     _type: string,
     _updatedAt: string
+}
+
+type StateContext = {
+    showCart: boolean;
+    setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
+    cartItems: ProductItem[];
+    handleAddProduct: (product: Product, qty: number) => void
+    total: {
+        price: number;
+        qty: number;
+    };
+    qty: number;
+    incrementQty: () => void;
+    decrementQty: () => void;
+    changeCartItemQty: (id: string, type: 'inc' | 'dec') => void
+    handleRemoveProduct: (id: string) => void
 }

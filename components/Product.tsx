@@ -12,7 +12,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 
     return ( 
         <div>
-            <Link href={`product/${slug.current}`}>
+            <Link href={`/product/${slug.current}`}>
                 <div className="product-card">
                     <img src={String(urlFor(image?.[0]))} alt="product-image"
                         className='product-image' width={250} height={250}

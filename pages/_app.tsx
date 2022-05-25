@@ -1,12 +1,18 @@
 import type { AppProps } from 'next/app';
 import { Layout } from '../components';
+import StateContext from '../context/StateContext';
 import '../styles/globals.css';
+import { Toaster } from 'react-hot-toast';
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+
+      <StateContext>
+        <Layout>
+          <Toaster />
+          <Component {...pageProps} />
+        </Layout>
+      </StateContext>
    )
 }

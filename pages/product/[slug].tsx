@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { client, urlFor } from '../../lib/client';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Product } from '../../components';
+import { useStateContext } from '../../context/StateContext';
 
 
 interface ProductDetailsProps {
@@ -11,20 +12,28 @@ interface ProductDetailsProps {
  
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product, similarProducts }) => {
 
-    const { image, name, details, price } = product
+    const { image, name, details, price } = product;
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const { decrementQty, incrementQty, qty, handleAddProduct }: StateContext = useStateContext();
 
     return ( 
         <div>
             <div className="product-detail-container">
                 <div>
                     <div className="img-container">
-                        <img src={String(urlFor(image?.[0]))} alt="product" />
+                        <img src={String(urlFor(image?.[selectedIndex]))||''} alt="product" 
+                            className='product-detail-image'/>
                     </div>
-                    {/* <div className="small-images-container">
+                    <div className="small-images-container">
                         {image?.map((item, index) => (
-                            <img src={String(urlFor(item))} key={index} alt={index + 'img'} />
+                            <img src={String(urlFor(item))} key={index} alt={index + 'img'} 
+                                className={selectedIndex === index 
+                                    ? 'small-image selected-image' 
+                                    : 'small-image'
+                                }
+                                onMouseEnter={() => setSelectedIndex(index)}/>
                         ))}
-                    </div> */}
+                    </div>
                 </div>
 
                 <div className="product-detail-desc">
@@ -45,13 +54,14 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, similarProduct
                     <div className="quantity">
                         <h3>Quantity:</h3>
                         <p className="quantity-desc">
-                            <span className="minus"><AiOutlineMinus/></span>
-                            <span className="num">0</span>
-                            <span className="plus"><AiOutlinePlus/></span>
+                            <span className="minus" onClick={decrementQty}><AiOutlineMinus/></span>
+                            <span className="num">{qty}</span>
+                            <span className="plus" onClick={incrementQty}><AiOutlinePlus/></span>
                         </p>
                     </div>
                     <div className="buttons">
-                        <button type='button' className='add-to-cart'>
+                        <button type='button' className='add-to-cart' 
+                            onClick={() => handleAddProduct(product, qty)}>
                             Add to Cart
                         </button>
                         <button type='button' className='buy-now'>
