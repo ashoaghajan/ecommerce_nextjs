@@ -1,7 +1,7 @@
 type Product = {
     details: string,
     image: {
-        assets:{
+        asset:{
             _ref: string,
             _type: string
         },
@@ -31,7 +31,7 @@ type BannerData = {
     discount: string,
     image: {
         _type: 'image', 
-        assets:{
+        asset:{
             _ref: string,
             _type: string
         },
