@@ -14,7 +14,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, similarProduct
 
     const { image, name, details, price } = product;
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const { decrementQty, incrementQty, qty, handleAddProduct }: StateContext = useStateContext();
+    const { decrementQty, incrementQty, qty, handleAddProduct, setShowCart }: StateContext = useStateContext();
+
+    const handleBuyNow = () => {
+        handleAddProduct(product, qty);
+        setShowCart(true);
+    }
 
     return ( 
         <div>
@@ -60,11 +65,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, similarProduct
                         </p>
                     </div>
                     <div className="buttons">
-                        <button type='button' className='add-to-cart' 
-                            onClick={() => handleAddProduct(product, qty)}>
+                        <button type='button' className='add-to-cart' onClick={() => handleAddProduct(product, qty)}>
                             Add to Cart
                         </button>
-                        <button type='button' className='buy-now'>
+                        <button type='button' className='buy-now' onClick={handleBuyNow}>
                             But now
                         </button>
                     </div>

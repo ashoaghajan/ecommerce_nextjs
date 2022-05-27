@@ -62,5 +62,10 @@ type StateContext = {
     incrementQty: () => void;
     decrementQty: () => void;
     changeCartItemQty: (id: string, type: 'inc' | 'dec') => void
-    handleRemoveProduct: (id: string) => void
+    handleRemoveProduct: (id: string) => void,
+    setCartItems: React.Dispatch<React.SetStateAction<ProductItem[]>>,
+    setTotal: React.Dispatch<React.SetStateAction<{
+        price: number;
+        qty: number;
+    }>>
 }

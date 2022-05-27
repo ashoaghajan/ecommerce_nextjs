@@ -72,11 +72,11 @@ const StateContext: React.FC<StateContextProps> = ({ children }) => {
 
     return ( 
         <Context.Provider value={{
-            showCart, setShowCart,
+            showCart, setShowCart, setCartItems,
             cartItems, handleAddProduct,
             total, changeCartItemQty,
             qty, incrementQty, decrementQty,
-            handleRemoveProduct
+            handleRemoveProduct, setTotal
         }}>
             {children}
         </Context.Provider>
